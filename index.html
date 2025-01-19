@@ -168,41 +168,7 @@
       from { background-color: #dc3545; }
       to { background-color: transparent; }
     }
-
-    .instagram-btn-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-      position: relative;
-    }
-
-    .instagram-btn-bg {
-      background-color: #ff4081; /* Color de fondo igual que los botones */
-      border: none;
-      border-radius: 8px;
-      width: 60px; /* Ajustar según sea necesario */
-      height: 60px; /* Ajustar según sea necesario */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute; /* Para que el contenedor de la imagen de Instagram se posicione encima */
-      z-index: 0;
-    }
-
-    .instagram-btn {
-  cursor: pointer;
-  position: relative; /* Para que se posicione encima del botón de fondo */
-  z-index: 1;
-  top: 3px; /* Ajusta este valor en píxeles para mover la imagen verticalmente */
-  transform: translateY(0); /* Anular el valor anterior (-50%) si no quieres centrar verticalmente */
-}
-
-
-
-    .instagram-btn:hover {
-      transform: scale(1.1);
-    }
+	  
   </style>
 </head>
 <body>
@@ -226,11 +192,6 @@
     </div>
     <div id="result-container"></div>
     <div id="result"></div>
-    <div class="instagram-btn-container">
-      <div class="instagram-btn-bg"></div>
-      <a href="https://www.instagram.com/amauryrrey/" target="_blank">
-        <img src="instagram.png" alt="Instagram" class="instagram-btn" width="50" height="50">
-      </a>
     </div>
   </div>
 </body>
