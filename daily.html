@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gracie Abrams Heardle</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>Gracie Abrams Heardle</h1>
+    <div id="audio-player" class="hidden">
+      <audio id="audio" controls></audio>
+    </div>
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <div class="input-grid">
+      <div class="input-container" id="input-container-1">
+        <input type="text" id="guess-input-1" placeholder="Type your guess here...">
+        <ul id="suggestions-1"></ul>
+      </div>
+      <div class="input-container" id="input-container-2">
+        <input type="text" id="guess-input-2" placeholder="" disabled>
+        <ul id="suggestions-2"></ul>
+      </div>
+      <div class="input-container" id="input-container-3">
+        <input type="text" id="guess-input-3" placeholder="" disabled>
+        <ul id="suggestions-3"></ul>
+      </div>
+      <div class="input-container" id="input-container-4">
+        <input type="text" id="guess-input-4" placeholder="" disabled>
+        <ul id="suggestions-4"></ul>
+      </div>
+      <div class="input-container" id="input-container-5">
+        <input type="text" id="guess-input-5" placeholder="" disabled>
+        <ul id="suggestions-5"></ul>
+      </div>
+    </div>
+    <button id="play-audio"><img src="play.png" alt="Play" class="play-icon"></button>
+<button class="button-home" onclick="location.href='index.html'">
+  <img src="home.png" alt="Home">
+</button>
+
+    <div class="stats">
+      <p id="current-streak">Current Streak: 0</p>
+      <p id="max-streak">Max Streak: 0</p>
+    </div>
+    <div id="result-container"></div>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
