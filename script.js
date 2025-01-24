@@ -122,43 +122,40 @@ const songs = [
       "59_Felt_Good_About_You.mp3"
     ];
 
-let currentSongIndex = 0;
+// Constantes y datos del almacenamiento local
+const today = new Date().toLocaleDateString();
+const lastPlayedDate = localStorage.getItem("lastPlayedDate");
+
+// Variables iniciales
+let currentSongIndex = parseInt(localStorage.getItem("currentSongIndex")) || 0;
+let randomStart = parseInt(localStorage.getItem("randomStart")) || 0;
 let score = localStorage.getItem("score") || 0;
 let highScore = localStorage.getItem("highScore") || 0;
-document.getElementById("current-streak").innerText = `Score: ${score}`;
-document.getElementById("max-streak").innerText = `Max Streak: ${highScore}`;
-let randomStart = null;
-const lastPlayedDate = localStorage.getItem("lastPlayedDate");
-const today = new Date().toLocaleDateString();
-
-// Verificar si el usuario ya jugó hoy
-if (lastPlayedDate === today) {
-
-} else {
-  localStorage.setItem("lastPlayedDate", today);
-  // Seleccionar una canción y fragmento al azar
-  currentSongIndex = Math.floor(Math.random() * songFiles.length);
-  randomStart = Math.floor(Math.random() * 90) + 30;
-  if (randomStart + 5 > audio.duration) {
-    randomStart = audio.duration - 5; // Ajustar si el tiempo de reproducción es mayor a la duración del audio
-  }
-  localStorage.setItem("currentSongIndex", currentSongIndex);
-  localStorage.setItem("randomStart", randomStart);
-}
-
-// Obtener la canción y fragmento del almacenamiento local
-currentSongIndex = parseInt(localStorage.getItem("currentSongIndex")) || 0;
-randomStart = parseInt(localStorage.getItem("randomStart")) || 0;
+let audioTimeout;
 let currentGuessIndex = 0;
 let currentPlayTime = 1; // Tiempo inicial de reproducción en segundos
 
+// Actualización del DOM con valores iniciales
+document.getElementById("current-streak").innerText = `Score: ${score}`;
+document.getElementById("max-streak").innerText = `Max Streak: ${highScore}`;
+
+// Elementos del DOM relacionados con las entradas de usuario
 const inputs = [];
 const suggestionLists = [];
 for (let i = 1; i <= 5; i++) {
   inputs.push(document.getElementById(`guess-input-${i}`));
   suggestionLists.push(document.getElementById(`suggestions-${i}`));
 }
+
+// Botón de reproducción de audio
 const playAudioBtn = document.getElementById("play-audio");
+
+// Iniciar el juego automáticamente si no se ha jugado hoy
+if (lastPlayedDate !== today) {
+  localStorage.removeItem("responses");
+  startGame();
+  localStorage.setItem("lastPlayedDate", today); // Guardar la nueva fecha en el localStorage
+}
 
 function showSuggestions(input, suggestions, value) {
   suggestions.innerHTML = "";
@@ -250,8 +247,6 @@ function startGame() {
     endGame(); // Finalizar el juego si ya se dio una respuesta correcta
   }
 }
-
-let audioTimeout;
 
 function playAudioSnippet() {
   clearTimeout(audioTimeout);
@@ -474,8 +469,3 @@ function endGame() {
 
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
-
-// Iniciar el juego automáticamente si no se ha jugado hoy
-if (lastPlayedDate !== today) {
-  startGame();
-}
