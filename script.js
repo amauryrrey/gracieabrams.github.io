@@ -153,6 +153,14 @@ const playAudioBtn = document.getElementById("play-audio");
 // Iniciar el juego automáticamente si no se ha jugado hoy
 if (lastPlayedDate !== today) {
   localStorage.removeItem("responses");
+  // Seleccionar una canción y fragmento al azar
+  currentSongIndex = Math.floor(Math.random() * songFiles.length);
+  randomStart = Math.floor(Math.random() * 90) + 30;
+  if (randomStart + 5 > audio.duration) {
+    randomStart = audio.duration - 5; // Ajustar si el tiempo de reproducción es mayor a la duración del audio
+  }
+  localStorage.setItem("currentSongIndex", currentSongIndex);
+  localStorage.setItem("randomStart", randomStart);
   startGame();
   localStorage.setItem("lastPlayedDate", today); // Guardar la nueva fecha en el localStorage
 }
