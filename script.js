@@ -164,7 +164,6 @@ if (lastPlayedDate !== today) {
   startGame();
   localStorage.setItem("lastPlayedDate", today); // Guardar la nueva fecha en el localStorage
 }
-
 function showSuggestions(input, suggestions, value) {
   suggestions.innerHTML = "";
   const filteredSongs = songs.filter(song =>
@@ -239,7 +238,6 @@ function startGame() {
   playAudioBtn.classList.remove("hidden");
 
   loadResponses(); // Cargar respuestas guardadas
-
   if (currentGuessIndex < inputs.length) {
     const nextInput = inputs[currentGuessIndex];
     nextInput.disabled = false;
@@ -248,8 +246,6 @@ function startGame() {
     nextInput.addEventListener("input", (e) => {
       showSuggestions(nextInput, suggestionLists[currentGuessIndex], e.target.value);
     });
-
-    playAudioSnippet(); // Reproducir el fragmento de la canción al iniciar el juego
   } else {
     // Si el juego ya ha terminado, asegurar que no se puedan enviar nuevas respuestas
     endGame(); // Finalizar el juego si ya se dio una respuesta correcta
@@ -352,6 +348,8 @@ function submitGuess() {
 
     // Finalizar el juego si la respuesta es correcta
     currentGuessIndex = inputs.length; // Asegurar que el índice se actualiza correctamente para evitar nuevas respuestas
+    currentPlayTime = 5;
+    playAudioSnippet();	
   } else {
     input.classList.add("flash-error");
     setTimeout(() => {
@@ -383,34 +381,6 @@ function submitGuess() {
 
       saveResponses(); // Guardar las respuestas en el localStorage
     }, 500);
-  }
-}
-
-function startGame() {
-  score = parseInt(localStorage.getItem("score")) || 0;
-  document.getElementById("current-streak").innerText = `Score: ${score}`;
-  document.getElementById("result-container").innerHTML = "";
-  document.getElementById("result").innerHTML = "";
-  document.querySelectorAll('.input-container').forEach((container, index) => {
-    container.querySelector("input").disabled = true;
-    container.querySelector("input").style.visibility = "visible";
-  });
-  playAudioBtn.classList.remove("hidden");
-
-  loadResponses(); // Cargar respuestas guardadas
-
-  if (currentGuessIndex < inputs.length) {
-    const nextInput = inputs[currentGuessIndex];
-    nextInput.disabled = false;
-    nextInput.focus();
-
-    nextInput.addEventListener("input", (e) => {
-      showSuggestions(nextInput, suggestionLists[currentGuessIndex], e.target.value);
-    });
-
-    playAudioSnippet(); // Reproducir el fragmento de la canción al iniciar el juego
-  } else {
-    // Si el juego ya ha terminado, asegurar que no se puedan enviar nuevas respuestas
   }
 }
 
@@ -461,7 +431,6 @@ function endGame() {
   const resultContainer = document.getElementById("result-container");
   const currentSongFile = songFiles[currentSongIndex];
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
-
   resultContainer.innerHTML = `
     <p>Oops, not this time!</p>
     <p>The song of the day was: ${currentSongName}.</p>
@@ -473,7 +442,4 @@ function endGame() {
 
   localStorage.setItem("score", 0);
 }
-
-
-
 playAudioBtn.addEventListener("click", playAudioSnippet);
