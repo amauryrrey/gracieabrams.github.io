@@ -313,11 +313,11 @@ function endGame() {
   const currentSongFile = songFiles[currentSongIndex];
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
 
-  resultContainer.innerHTML = `
-    <p>¡Fin del juego! Obtuviste ${score} puntos.</p>
-    <p>La respuesta correcta era: ${currentSongName}.</p>
-    ${score > highScore11 ? `<p>¡Nuevo puntaje más alto!</p>` : ""}
-    <button onclick="startGame()">Jugar de nuevo</button>
+ resultContainer.innerHTML = `
+    <p>Game over! You scored ${score} points.</p>
+    <p>The correct answer was: ${currentSongName}.</p>
+    ${score > highScore11 ? `<p>New high score!</p>` : ""}
+    <button onclick="startGame()">Play again</button>
   `;
   if (score > highScore11) {
     highScore11 = score;
