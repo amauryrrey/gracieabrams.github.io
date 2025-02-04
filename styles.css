@@ -161,12 +161,12 @@ button#play-audio {
 }
 
 @keyframes flash-success {
-  from { background-color: #28a745; }
+  from { background-color: rgba(46, 107, 59, 0.6); }
   to { background-color: transparent; }
 }
 
 @keyframes flash-error {
-  from { background-color: #dc3545; }
+  from { background-color: rgba(168, 60, 60, 0.5); }
   to { background-color: transparent; }
 }
 .modal {
