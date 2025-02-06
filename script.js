@@ -391,18 +391,10 @@ function submitGuess() {
   playAudioSnippet();
 
   // Calcular y guardar el porcentaje de victorias
-let winPercentage = Math.round((wins / played) * 100);
-localStorage.setItem("winPercentage", winPercentage);
-
-// Mostrar resultados
-console.log("Wins:", wins); // Salida: 15
-console.log("Played:", played); // Salida: 10
-console.log("Win Percentage:", winPercentage); // Salida: 150
-
   // Mostrar estadísticas después de 1 segundo
   setTimeout(() => {
     showStatistics();
-  }, 1000);
+  }, 2000);
 }else 
 {
     const guessedSongAlbum = getAlbumForSong(guess); // Obtener el álbum de la canción ingresada
@@ -534,7 +526,8 @@ function showStatistics() {
   // Obtener elementos del DOM
   const modal = document.getElementById("statisticsModal");
   const closeBtn = document.querySelector(".close-btn");
-
+let winPercentage = Math.round((wins / played) * 100);
+localStorage.setItem("winPercentage", winPercentage);
   // Actualizar las estadísticas en la ventana modal
   document.getElementById("played").textContent = played;
   document.getElementById("winPercentage").textContent = `${winPercentage}%`;
