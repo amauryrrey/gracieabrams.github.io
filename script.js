@@ -206,6 +206,7 @@ let highstreak = localStorage.getItem("highstreak") || 0;
 let audioTimeout;
 let currentGuessIndex = 0;
 let currentPlayTime = 1; // Tiempo inicial de reproducción en segundos
+let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0]; // Inicializar con 5 posiciones
 
 // Elementos del DOM relacionados con las entradas de usuario
 const inputs = [];
@@ -232,82 +233,6 @@ if (lastPlayedDate !== today) {
   startGame();
   localStorage.setItem("lastPlayedDate", today); // Guardar la nueva fecha en el localStorage
 }
-
-function showSuggestions(input, suggestions, value) {
-  suggestions.innerHTML = "";
-
-  const filteredSongs = songs.filter(song =>
-    song.toLowerCase().includes(value.toLowerCase().replace(/\s/g, "_"))
-  );
-
-  filteredSongs.forEach(song => {
-    const li = document.createElement("li");
-    li.textContent = song.replace(/_/g, " ");
-    li.classList.add('suggestion-item');
-
-    li.addEventListener("click", () => {
-      input.value = song.replace(/_/g, " ");
-      suggestions.innerHTML = "";
-      submitGuess();
-    });
-
-    suggestions.appendChild(li);
-  });
-
-  selectedIndex = -1; // Reiniciar el índice seleccionado
-}
-
-let selectedIndex = -1;
-
-inputs.forEach((input, index) => {
-  input.addEventListener("input", (e) => {
-    showSuggestions(input, suggestionLists[index], e.target.value);
-  });
-
-  input.addEventListener("keydown", (e) => {
-    const items = suggestionLists[index].getElementsByClassName("suggestion-item");
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-
-      if (selectedIndex < items.length - 1) {
-        selectedIndex++;
-      } else {
-        selectedIndex = 0;
-      }
-
-      for (let i = 0; i < items.length; i++) {
-        items[i].classList.remove("selected");
-      }
-
-      items[selectedIndex].classList.add("selected");
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-
-      if (selectedIndex > 0) {
-        selectedIndex--;
-      } else {
-        selectedIndex = items.length - 1;
-      }
-
-      for (let i = 0; i < items.length; i++) {
-        items[i].classList.remove("selected");
-      }
-
-      items[selectedIndex].classList.add("selected");
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-
-      if (selectedIndex >= 0) {
-        input.value = items[selectedIndex].textContent;
-        selectedIndex = -1;
-        submitGuess();
-      } else {
-        submitGuess();
-      }
-    }
-  });
-});
 
 function startGame() {
   played += 1;
@@ -463,11 +388,6 @@ function submitGuess() {
   currentGuessIndex = inputs.length; // Asegurar que el índice se actualiza correctamente para evitar nuevas respuestas
   currentPlayTime = 5;
   playAudioSnippet();
-
-  // Calcular y guardar el porcentaje de victorias
-  winPercentage = Math.round((streak / played) * 100);
-  localStorage.setItem("winPercentage", winPercentage);
-
   // Mostrar estadísticas después de 1 segundo
   setTimeout(() => {
     showStatistics();
@@ -606,6 +526,9 @@ function showStatistics() {
   document.getElementById("winPercentage").textContent = `${winPercentage}%`;
   document.getElementById("streak").textContent = streak;
   document.getElementById("highstreak").textContent = highstreak;
+  let wins=attemptHistory[0]+attemptHistory[1]+attemptHistory[2]+attemptHistory[3]+attemptHistory[4];
+  winPercentage = Math.round((wins / played) * 100);
+  localStorage.setItem("winPercentage", winPercentage);
 
   // Mostrar las barras de intentos
   displayAttemptBars();
@@ -677,6 +600,7 @@ function endGame() {
   const currentSongFile = songFiles[currentSongIndex];
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
   document.getElementById("audio-player").classList.add("hidden");
+
   if (guess === currentSongName) {
 }
 else{
@@ -684,4 +608,81 @@ localStorage.setItem("streak", 0);
 }
   showStatistics();
 }
+
+function showSuggestions(input, suggestions, value) {
+  suggestions.innerHTML = "";
+
+  const filteredSongs = songs.filter(song =>
+    song.toLowerCase().includes(value.toLowerCase().replace(/\s/g, "_"))
+  );
+
+  filteredSongs.forEach(song => {
+    const li = document.createElement("li");
+    li.textContent = song.replace(/_/g, " ");
+    li.classList.add('suggestion-item');
+
+    li.addEventListener("click", () => {
+      input.value = song.replace(/_/g, " ");
+      suggestions.innerHTML = "";
+      submitGuess();
+    });
+
+    suggestions.appendChild(li);
+  });
+
+  selectedIndex = -1; // Reiniciar el índice seleccionado
+}
+
+let selectedIndex = -1;
+
+inputs.forEach((input, index) => {
+  input.addEventListener("input", (e) => {
+    showSuggestions(input, suggestionLists[index], e.target.value);
+  });
+
+  input.addEventListener("keydown", (e) => {
+    const items = suggestionLists[index].getElementsByClassName("suggestion-item");
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+
+      if (selectedIndex < items.length - 1) {
+        selectedIndex++;
+      } else {
+        selectedIndex = 0;
+      }
+
+      for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove("selected");
+      }
+
+      items[selectedIndex].classList.add("selected");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+
+      if (selectedIndex > 0) {
+        selectedIndex--;
+      } else {
+        selectedIndex = items.length - 1;
+      }
+
+      for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove("selected");
+      }
+
+      items[selectedIndex].classList.add("selected");
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+
+      if (selectedIndex >= 0) {
+        input.value = items[selectedIndex].textContent;
+        selectedIndex = -1;
+        submitGuess();
+      } else {
+        submitGuess();
+      }
+    }
+  });
+});
+
 playAudioBtn.addEventListener("click", playAudioSnippet);
