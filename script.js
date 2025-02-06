@@ -677,8 +677,11 @@ function endGame() {
   const currentSongFile = songFiles[currentSongIndex];
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
   document.getElementById("audio-player").classList.add("hidden");
-
-  localStorage.setItem("streak", 0);
+  if (guess === currentSongName) {
+}
+else{
+localStorage.setItem("streak", 0);
+}
   showStatistics();
 }
 playAudioBtn.addEventListener("click", playAudioSnippet);
