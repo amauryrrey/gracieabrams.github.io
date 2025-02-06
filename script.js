@@ -206,7 +206,8 @@ let highstreak = localStorage.getItem("highstreak") || 0;
 let audioTimeout;
 let currentGuessIndex = 0;
 let currentPlayTime = 1; // Tiempo inicial de reproducción en segundos
-let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0]; // Inicializar con 5 posiciones
+let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0];
+let wins = parseInt(localStorage.getItem("wins")) || 0;
 
 // Elementos del DOM relacionados con las entradas de usuario
 const inputs = [];
@@ -388,6 +389,16 @@ function submitGuess() {
   currentGuessIndex = inputs.length; // Asegurar que el índice se actualiza correctamente para evitar nuevas respuestas
   currentPlayTime = 5;
   playAudioSnippet();
+
+  // Calcular y guardar el porcentaje de victorias
+let winPercentage = Math.round((wins / played) * 100);
+localStorage.setItem("winPercentage", winPercentage);
+
+// Mostrar resultados
+console.log("Wins:", wins); // Salida: 15
+console.log("Played:", played); // Salida: 10
+console.log("Win Percentage:", winPercentage); // Salida: 150
+
   // Mostrar estadísticas después de 1 segundo
   setTimeout(() => {
     showStatistics();
@@ -463,6 +474,9 @@ function saveAttemptHistory(attemptIndex) {
   let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0]; // Inicializar con 5 posiciones
   attemptHistory[attemptIndex]++; // Incrementar el contador en la posición correspondiente
   localStorage.setItem("attemptHistory", JSON.stringify(attemptHistory));
+  wins = attemptHistory.reduce((sum, value) => sum + value, 0);
+  localStorage.setItem("wins", wins);
+
 }
 
 function loadResponses() {
@@ -526,9 +540,6 @@ function showStatistics() {
   document.getElementById("winPercentage").textContent = `${winPercentage}%`;
   document.getElementById("streak").textContent = streak;
   document.getElementById("highstreak").textContent = highstreak;
-  let wins=attemptHistory[0]+attemptHistory[1]+attemptHistory[2]+attemptHistory[3]+attemptHistory[4];
-  winPercentage = Math.round((wins / played) * 100);
-  localStorage.setItem("winPercentage", winPercentage);
 
   // Mostrar las barras de intentos
   displayAttemptBars();
