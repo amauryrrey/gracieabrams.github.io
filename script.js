@@ -208,6 +208,7 @@ let currentGuessIndex = 0;
 let currentPlayTime = 1; // Tiempo inicial de reproducción en segundos
 let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0];
 let wins = parseInt(localStorage.getItem("wins")) || 0;
+let guess = parseInt(localStorage.getItem("guess"));
 
 // Elementos del DOM relacionados con las entradas de usuario
 const inputs = [];
@@ -236,13 +237,11 @@ if (lastPlayedDate !== today) {
 }
 
 function startGame() {
-  played += 1;
-  localStorage.setItem("played", played);
-
   streak = parseInt(localStorage.getItem("streak")) || 0;
   document.getElementById("result-container").innerHTML = "";
   document.getElementById("result").innerHTML = "";
-
+  played+=1;
+  localStorage.setItem("played", played);
   document.querySelectorAll('.input-container').forEach((container, index) => {
     container.querySelector("input").disabled = true;
     container.querySelector("input").style.visibility = "visible";
@@ -351,11 +350,11 @@ function submitGuess() {
     currentSongFile.indexOf("_") + 1,
     currentSongFile.lastIndexOf(".")
   ).toLowerCase();
-
   // Ocultar la lista desplegable
   suggestionList.innerHTML = "";
 
   if (guess === currentSongName) {
+
   // Incrementar la racha y actualizar el localStorage
   streak++;
   localStorage.setItem("streak", streak);
@@ -408,7 +407,6 @@ if(currentSongAlbum===guessedSongAlbum){
       albumBox.classList.add("album-box");
       albumBox.innerText = userGuess;
       input.parentNode.appendChild(albumBox);
-
       currentGuessIndex++;
 
       if (currentGuessIndex < 5) {
@@ -595,7 +593,6 @@ function displayAttemptBars() {
 }
 function getAlbumForSong(songName) {
   const songData = songsData.find(song => song.name.toLowerCase() === songName.toLowerCase());
-  console.log("Canción buscada:", songName, "Álbum encontrado:", songData ? songData.album : null);
   return songData ? songData.album : null;
 }
 
@@ -605,9 +602,7 @@ function endGame() {
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
   document.getElementById("audio-player").classList.add("hidden");
 
-  if (guess === currentSongName) {
-}
-else{
+  if (currentGuessIndex === 5 && currentSongName!==guess) {
 localStorage.setItem("streak", 0);
 }
   showStatistics();
@@ -690,3 +685,5 @@ inputs.forEach((input, index) => {
 });
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
+playAudioBtn.classList.remove("hidden");
+console.log("Cambio subido");
