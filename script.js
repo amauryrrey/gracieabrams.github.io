@@ -208,7 +208,7 @@ let currentGuessIndex = 0;
 let currentPlayTime = 1; // Tiempo inicial de reproducción en segundos
 let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0];
 let wins = parseInt(localStorage.getItem("wins")) || 0;
-let guess = parseInt(localStorage.getItem("guess"));
+let isWin = JSON.parse(localStorage.getItem("isWin")) || false;
 
 // Elementos del DOM relacionados con las entradas de usuario
 const inputs = [];
@@ -230,6 +230,8 @@ if (lastPlayedDate !== today) {
   if (randomStart + 5 > audio.duration) {
     randomStart = audio.duration - 5; // Ajustar si el tiempo de reproducción es mayor a la duración del audio
   }
+  isWin=false;
+  localStorage.setItem("isWin", JSON.stringify(isWin));
   localStorage.setItem("currentSongIndex", currentSongIndex);
   localStorage.setItem("randomStart", randomStart);
   startGame();
@@ -354,7 +356,8 @@ function submitGuess() {
   suggestionList.innerHTML = "";
 
   if (guess === currentSongName) {
-
+  isWin=true;
+localStorage.setItem("isWin", JSON.stringify(isWin));
   // Incrementar la racha y actualizar el localStorage
   streak++;
   localStorage.setItem("streak", streak);
@@ -393,7 +396,7 @@ function submitGuess() {
   // Mostrar estadísticas después de 1 segundo
   setTimeout(() => {
     showStatistics();
-  }, 2000);
+  }, 1000);
 }else 
 {
     const guessedSongAlbum = getAlbumForSong(guess); // Obtener el álbum de la canción ingresada
@@ -485,6 +488,10 @@ function loadResponses() {
         successBox.innerText = response.value;
         input.parentNode.appendChild(successBox);
         input.style.visibility = "hidden";
+ for (let i = currentGuessIndex + 1; i < inputs.length; i++) {
+    const nextInputContainer = inputs[i].parentNode;
+    nextInputContainer.style.display = "none"; // Ocultar completamente el contenedor
+  }
         currentGuessIndex = inputs.length; // Asegurar que el índice se actualiza correctamente para evitar nuevas respuestas
       } else if (response.hasErrorBox) {
         const errorBox = document.createElement("div");
@@ -602,7 +609,7 @@ function endGame() {
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
   document.getElementById("audio-player").classList.add("hidden");
 
-  if (currentGuessIndex === 5 && currentSongName!==guess) {
+  if (isWin===false) {
 localStorage.setItem("streak", 0);
 }
   showStatistics();
@@ -686,4 +693,4 @@ inputs.forEach((input, index) => {
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
 playAudioBtn.classList.remove("hidden");
-console.log("Cambio subido");
+console.log("Hi");
