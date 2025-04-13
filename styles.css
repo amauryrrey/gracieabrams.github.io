@@ -121,6 +121,33 @@ button#play-audio {
 .button-home:hover, .button-stats:hover {
   background-color: transparent; /* Fondo transparente al hacer hover */
 }
+.social-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-buttons a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+.social-buttons img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+/* Efecto hover opcional */
+.social-buttons img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 
 .progress-bar-container {
   width: 80%;
@@ -166,7 +193,7 @@ button#play-audio {
 }
 
 @keyframes flash-error {
-  from { background-color: rgba(168, 60, 60, 0.5); }
+  from { background-color: #dc3545; }
   to { background-color: transparent; }
 }
 .modal {
@@ -357,3 +384,4 @@ input:focus {
   height: auto;
   line-height: 1.5;
 }
+
