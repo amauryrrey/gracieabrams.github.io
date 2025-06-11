@@ -693,4 +693,3 @@ inputs.forEach((input, index) => {
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
 playAudioBtn.classList.remove("hidden");
-console.log("Hi");
