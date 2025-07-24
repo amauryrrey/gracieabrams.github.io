@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gracieabramsheardle.netlify.app/sitemap.xml
