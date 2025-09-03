@@ -312,12 +312,24 @@ function endGame() {
   const currentSongFile = songFiles[currentSongIndex];
   const currentSongName = currentSongFile.slice(currentSongFile.indexOf("_") + 1, currentSongFile.lastIndexOf(".")).replace(/_/g, " ");
 
- resultContainer.innerHTML = `
+    if(score==1)
+    {
+         resultContainer.innerHTML = `
+    <p>Game over! You scored ${score} point.</p>
+    <p>The correct answer was: ${currentSongName}.</p>
+    ${score > highScore11 ? `<p>New high score!</p>` : ""}
+    <a class="button play" onclick="startGame()" id="play-again"><img alt="´Play-again"></a>
+  `;
+    }
+    else {
+         resultContainer.innerHTML = `
     <p>Game over! You scored ${score} points.</p>
     <p>The correct answer was: ${currentSongName}.</p>
     ${score > highScore11 ? `<p>New high score!</p>` : ""}
     <a class="button play" onclick="startGame()" id="play-again"><img alt="´Play-again"></a>
   `;
+    }
+    
   if (score > highScore11) {
     highScore11 = score;
     localStorage.setItem("highScore11", highScore11);
@@ -329,3 +341,4 @@ function endGame() {
 }
 document.getElementById("start-game").addEventListener("click", startGame);
 submitGuessBtn.addEventListener("click", submitGuess);
+
