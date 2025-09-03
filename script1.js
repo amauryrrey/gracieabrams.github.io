@@ -200,7 +200,6 @@ function startGame() {
   document.getElementById("result-container").innerHTML = ""; // Limpiar el contenedor de resultados
   document.getElementById("result").innerHTML = ""; // Limpiar la respuesta correcta
   document.querySelector('.input-container-rapid').classList.remove("hidden"); // Mostrar la casilla de entrada exclusiva de rapid.html
-  submitGuessBtn.classList.remove("hidden");
   document.getElementById("start-game").classList.add("hidden"); // Ocultar el botón de empezar juego
 
   currentSongIndex = Math.floor(Math.random() * songFiles.length); // Seleccionar una canción aleatoria al inicio del juego
@@ -317,14 +316,13 @@ function endGame() {
     <p>Game over! You scored ${score} points.</p>
     <p>The correct answer was: ${currentSongName}.</p>
     ${score > highScore11 ? `<p>New high score!</p>` : ""}
-    <button onclick="startGame()">Play again</button>
+    <a class="button play" onclick="startGame()" id="play-again"><img alt="´Play-again"></a>
   `;
   if (score > highScore11) {
     highScore11 = score;
     localStorage.setItem("highScore11", highScore11);
     document.getElementById("high-score").innerText = `High Score: ${highScore11}`;
   }
-  submitGuessBtn.classList.add("hidden");
   input.value = "";
   document.getElementById("audio-player").classList.add("hidden");
   document.querySelector('.input-container-rapid').classList.add('hidden');
