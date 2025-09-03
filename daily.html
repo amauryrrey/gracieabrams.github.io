@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gracie Abrams Heardle</title>
   <link rel="icon" type="image/png" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles3.css">
 </head>
 <body>
  <div class="game-container">
   <!-- Título centrado en la parte superior -->
-  <h1 style="text-align: center;">Gracie Abrams Heardle</h1>
-
+  <a href="/" class="logo"></a>
   <div id="audio-player" class="hidden">
     <audio id="audio" controls></audio>
   </div>
@@ -40,18 +39,7 @@
       <ul id="suggestions-5"></ul>
     </div>
   </div>
-  <button id="play-audio"><img src="play.png" alt="Play" class="play-icon"></button>
-
-  <!-- Botón Home en la esquina inferior izquierda -->
-  <button class="button-home" onclick="location.href='index.html'" style="position: absolute; bottom: 20px; left: 20px;">
-    <img src="home.png" alt="Home">
-  </button>
-
-  <!-- Botón Stats en la esquina inferior derecha -->
-  <button class="button-stats" onclick="showStatistics()" style="position: absolute; bottom: 20px; right: 20px;">
-    <img src="stats.png" alt="Stats">
-  </button>
-
+    <a class="button start" id="play-audio"><img alt="Start"></a>
   <div id="result-container"></div>
   <div id="result"></div>
 </div>
@@ -59,7 +47,7 @@
   <div id="statisticsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Gracie Abrams Heardle Statistics</h2>
+        <a href="/" class="logo1"></a>
         <span class="close-btn">&times;</span>
       </div>
       <div class="modal-body">
@@ -88,7 +76,7 @@
           Twitter
         </a>
          para mantenerte informado!
-      </div>
+          </div>
         <div style="margin-top: 20px; text-align: center; color: #ffffff; font-size: 16px;">
         Vote for I love you I´m sorry   
         <a href="https://www.mtv.com/event/vma/vote/song-of-the-year" target="_blank" style="color: #1DA1F2; text-decoration: none; font-weight: bold;">
@@ -101,4 +89,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
