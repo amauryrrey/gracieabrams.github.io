@@ -365,7 +365,9 @@ localStorage.setItem("isWin", JSON.stringify(isWin));
     highstreak = streak;
     localStorage.setItem("highstreak", highstreak);
   }
-
+  input.classList.add("flash-success");
+  setTimeout(() => {
+    input.classList.remove("flash-success");
   // Crear y mostrar la caja de éxito
   const successBox = document.createElement("div");
   successBox.classList.add("success-box");
@@ -391,7 +393,7 @@ localStorage.setItem("isWin", JSON.stringify(isWin));
   currentGuessIndex = inputs.length; // Asegurar que el índice se actualiza correctamente para evitar nuevas respuestas
   currentPlayTime = 5;
   playAudioSnippet();
-
+}, 500);
   // Calcular y guardar el porcentaje de victorias
   // Mostrar estadísticas después de 1 segundo
   setTimeout(() => {
@@ -403,8 +405,12 @@ localStorage.setItem("isWin", JSON.stringify(isWin));
     const currentSongAlbum = getAlbumForSong(currentSongName); // Obtener el álbum de la canción correcta
 if(currentSongAlbum===guessedSongAlbum){
       const userGuess = input.value;
+        input.classList.add("flash-album");
+  setTimeout(() => {
+    input.classList.remove("flash-album");
       input.value = "";
       input.style.visibility = "hidden";
+
 
       const albumBox = document.createElement("div");
       albumBox.classList.add("album-box");
@@ -426,6 +432,7 @@ if(currentSongAlbum===guessedSongAlbum){
         endGame();
       }
       saveResponses(); // Guardar las respuestas en el localStorage
+      }, 500);
   }else {
     input.classList.add("flash-error");
     setTimeout(() => {
@@ -461,7 +468,6 @@ if(currentSongAlbum===guessedSongAlbum){
   }
 }
 }
-
 // Función para guardar el historial de intentos
 function saveAttemptHistory(attemptIndex) {
   let attemptHistory = JSON.parse(localStorage.getItem("attemptHistory")) || [0, 0, 0, 0, 0]; // Inicializar con 5 posiciones
