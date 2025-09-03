@@ -141,10 +141,12 @@
     li.textContent = song.replace(/_/g, " ");
     li.classList.add('suggestion-item');  // Añadir clase para los ítems de sugerencias
     li.addEventListener("click", () => {
-      input.value = song.replace(/_/g, " ");
-      suggestions.innerHTML = "";
-      submitGuess(); // Enviar la respuesta al hacer clic en la sugerencia
-    });
+  input.value = song.replace(/_/g, " ");
+  suggestions.innerHTML = "";
+  submitGuess(); 
+  input.focus(); // <- vuelve a enfocar el input y mantiene abierto el teclado
+});
+
     suggestions.appendChild(li);
   });
   selectedIndex = -1; // Reiniciar el índice seleccionado
@@ -341,4 +343,5 @@ function endGame() {
 }
 document.getElementById("start-game").addEventListener("click", startGame);
 submitGuessBtn.addEventListener("click", submitGuess);
+
 
