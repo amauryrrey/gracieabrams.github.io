@@ -242,8 +242,6 @@ function startGame() {
   streak = parseInt(localStorage.getItem("streak")) || 0;
   document.getElementById("result-container").innerHTML = "";
   document.getElementById("result").innerHTML = "";
-  played+=1;
-  localStorage.setItem("played", played);
   document.querySelectorAll('.input-container').forEach((container, index) => {
     container.querySelector("input").disabled = true;
     container.querySelector("input").style.visibility = "visible";
@@ -354,7 +352,10 @@ function submitGuess() {
   ).toLowerCase();
   // Ocultar la lista desplegable
   suggestionList.innerHTML = "";
-
+  if (currentGuessIndex === 0) {
+  played+=1;
+  localStorage.setItem("played", played);
+  }
   if (guess === currentSongName) {
   isWin=true;
 localStorage.setItem("isWin", JSON.stringify(isWin));
@@ -699,3 +700,4 @@ inputs.forEach((input, index) => {
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
 playAudioBtn.classList.remove("hidden");
+
