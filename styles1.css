@@ -90,26 +90,26 @@ h1 {
   content: url("botonrapid.png");
 }
 .rapid img:hover {
-  content: url("botonrapidcursor.png");
+  transform: scale(1.1);
 }
 
 .daily img {
   content: url("botondaily.png");
 }
 .daily img:hover {
-  content: url("botondailycursor.png");
+  transform: scale(1.1);
 }
 .instagram img {
   content: url("botoninstagram.png");
 }
 .instagram img:hover {
-  content: url("botoninstagramcursor.png");
+  transform: scale(1.1);
 }
 .x img {
   content: url("botonx.png");
 }
 .x img:hover {
-  content: url("botonxcursor.png");
+  transform: scale(1.1);
 }
 .social-buttons {
   display: flex;
@@ -141,4 +141,5 @@ h1 {
 .hidden {
     display: none !important;
 }
+
 
