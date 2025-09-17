@@ -47,7 +47,6 @@ body {
 
 .logo:hover {
   transform: scale(1.1);
-  content: url("logo-hover.png"); /* Imagen al pasar el mouse */
 }
 
 .logo1 {
@@ -63,7 +62,6 @@ body {
 
 .logo1:hover {
   transform: scale(1.1);
-  content: url("logo-hover.png"); /* Imagen al pasar el mouse */
 }
 
 @keyframes glow {
@@ -206,7 +204,7 @@ li:hover, .selected {
   content: url("botonplay.png");
 }
 .start img:hover {
-  content: url("botonplaycursor.png");
+  transform: scale(1.1);
 }
 #score, #high-score, #result-container {
     color: white;
@@ -426,5 +424,6 @@ input:focus {
 .hidden {
     display: none !important;
 }
+
 
 
