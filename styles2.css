@@ -47,7 +47,6 @@ body {
 
 .logo:hover {
   transform: scale(1.1);
-  content: url("logo-hover.png"); /* Imagen al pasar el mouse */
 }
 
 
@@ -183,13 +182,13 @@ li:hover, .selected {
   content: url("botonstart.png");
 }
 .start img:hover {
-  content: url("botonstartcursor.png");
+  transform: scale(1.1);
 }
 .play img {
   content: url("botonplayagain.png");
 }
 .play img:hover {
-  content: url("botonplayagaincursor.png");
+  transform: scale(1.1);
 }
 #score, #high-score, #result-container {
     color: white;
@@ -219,4 +218,5 @@ li:hover, .selected {
 .hidden {
     display: none !important;
 }
+
 
