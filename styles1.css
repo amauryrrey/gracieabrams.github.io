@@ -13,7 +13,6 @@ body {
         url('gracieabrams.jpg') repeat;
     background-size: 200px 200px, 300px 300px, 250px 250px;
     background-position: 0 0, 50px 50px, 100px 100px;
-    animation: moverFondo 10s linear infinite;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -21,12 +20,6 @@ body {
   justify-content: center;
   height: 100vh;
   position: relative;
-}
-
-@keyframes moverFondo {
-    0% { background-position: 0 0, 50px 50px, 100px 100px; }
-    100% { background-position: 200px 200px, 250px 250px, 300px 300px; }
-}
 
 /* Logo centrado */
 .logo {
@@ -141,5 +134,6 @@ h1 {
 .hidden {
     display: none !important;
 }
+
 
 
