@@ -223,10 +223,18 @@ const playAudioBtn = document.getElementById("play-audio");
 
 // Iniciar el juego automáticamente si no se ha jugado hoy
 if (lastPlayedDate !== today) {
-  localStorage.removeItem("responses");
-  // Seleccionar una canción y fragmento al azar
-  currentSongIndex = Math.floor(Math.random() * songFiles.length);
-  randomStart = Math.floor(Math.random() * 90) + 30;
+  localStorage.removeItem("responses");  
+  // --- Lógica de Semilla Diaria ---
+  // Convertimos la fecha 'today' en un número para usarlo como semilla
+  // Esto asegura que currentSongIndex y randomStart sean iguales para todos hoy
+  const seed = today.split('-').join(''); // Convierte "2026-02-12" en 20260212
+  
+  // Seleccionar la misma canción para todos hoy
+  currentSongIndex = parseInt(seed) % songFiles.length;
+
+  // Seleccionar el mismo fragmento de inicio para todos hoy
+  // Usamos una operación matemática simple con la semilla para que varíe el segundo
+  randomStart = (parseInt(seed) % 90) + 30; 
   if (randomStart + 5 > audio.duration) {
     randomStart = audio.duration - 5; // Ajustar si el tiempo de reproducción es mayor a la duración del audio
   }
@@ -700,4 +708,5 @@ inputs.forEach((input, index) => {
 
 playAudioBtn.addEventListener("click", playAudioSnippet);
 playAudioBtn.classList.remove("hidden");
+
 
