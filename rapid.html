@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGTCWN83');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gracie Abrams Heardle</title>
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGTCWN83"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <div class="game-container">
+<a href="/" class="logo"></a>
+    <div id="audio-player" class="hidden">
+      <audio id="audio" controls></audio>
+    </div>
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <div class="input-container-rapid hidden">
+      <input type="text" id="guess-input" placeholder="Type your guess here...">
+      <ul id="suggestions"></ul>
+    </div>
+    <a class="button start" id="start-game"><img alt="Start"></a>
+    <a id="submit-guess" class="hidden">Submit Guess</a	>
+    <div class="stats">
+      <p id="score">Score: 0</p>
+      <p id="high-score">High Score: 0</p>
+    </div>
+    <div id="result-container"></div>
+    <div id="result"></div>
+  </div>
+  <div id="mode-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Select Mode</h2>
+        <span class="close-btn" id="close-modal">&times;</span>
+      </div>
+      <div class="modal-body mode-selection">
+        <button class="modal-btn" onclick="selectMode('all')">All Songs</button>
+        <button class="modal-btn" onclick="selectMode('dfh')">Daughter from Hell</button>
+        <button class="modal-btn" onclick="selectMode('no_dfh')">No Daughter from Hell</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>
+

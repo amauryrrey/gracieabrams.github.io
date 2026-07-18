@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGTCWN83');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gracie Abrams Heardle</title>
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGTCWN83"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ <div class="game-container">
+  <!-- Título centrado en la parte superior -->
+  <a href="/" class="logo"></a>
+  <div id="audio-player" class="hidden">
+    <audio id="audio" controls></audio>
+  </div>
+  <div class="progress-bar-container">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+  <div class="input-grid">
+    <div class="input-container" id="input-container-1">
+      <input type="text" id="guess-input-1" placeholder="Type your guess here...">
+      <ul id="suggestions-1"></ul>
+    </div>
+    <div class="input-container" id="input-container-2">
+      <input type="text" id="guess-input-2" placeholder="" disabled>
+      <ul id="suggestions-2"></ul>
+    </div>
+    <div class="input-container" id="input-container-3">
+      <input type="text" id="guess-input-3" placeholder="" disabled>
+      <ul id="suggestions-3"></ul>
+    </div>
+    <div class="input-container" id="input-container-4">
+      <input type="text" id="guess-input-4" placeholder="" disabled>
+      <ul id="suggestions-4"></ul>
+    </div>
+    <div class="input-container" id="input-container-5">
+      <input type="text" id="guess-input-5" placeholder="" disabled>
+      <ul id="suggestions-5"></ul>
+    </div>
+  </div>
+    <a class="button start" id="play-audio"><img alt="Start"></a>
+  <div id="result-container"></div>
+  <div id="result"></div>
+</div>
+  <!-- Ventana Modal -->
+  <div id="statisticsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href="/" class="logo1"></a>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="stat">
+          <span class="stat-value" id="played">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="winPercentage">0%</span>
+          <span class="stat-label">Win %</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="streak">0</span>
+          <span class="stat-label">Current Streak</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="highstreak">0</span>
+          <span class="stat-label">Max Streak</span>
+        </div>
+        <!-- Contenedor para las barras de intentos -->
+        <div id="attempts-container" class="attempts-container"></div>
+      </div>
+      <div class="modal-footer-text">
+        ¡Sígue a Gracie Abrams MX en  
+        <a href="https://x.com/gracieabramsMX" target="_blank">
+          Twitter
+        </a>
+         para mantenerte informado!
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
